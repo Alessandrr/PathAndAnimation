@@ -23,24 +23,23 @@ struct ContentView: View {
                     ForEach(0..<12) { iteration in
                         Petal()
                             .rotationEffect(.degrees(Double(iteration * 360 / numberOfPetals)))
-                            .offset(x: 175 * cos(CGFloat(iteration) * 2 * .pi / CGFloat(numberOfPetals) - .pi/2),
-                                    y: 175 * sin(CGFloat(iteration) * 2 * .pi / CGFloat(numberOfPetals) - .pi/2))
-                            .scaleEffect(0.4)
+                            .offset(
+                                x: 175 * cos(CGFloat(iteration) * 2 * .pi / CGFloat(numberOfPetals) - .pi/2),
+                                y: 175 * sin(CGFloat(iteration) * 2 * .pi / CGFloat(numberOfPetals) - .pi/2)
+                            )
+                            .scaleEffect(figureIsShowing ? 0.4 : 0.1)
+                            .opacity(figureIsShowing ? 1 : 0)
                     }
                 }
                 .frame(width: 400, height: 400)
-                .rotationEffect(.degrees(figureIsShowing ? -180 : 0))
-                .transition(AnyTransition.scale)
             }
-
-            
-
             Spacer()
         }
+        .padding()
     }
     
     private func buttonAction() {
-        withAnimation {
+        withAnimation(.interpolatingSpring(mass: 0.2, stiffness: 0.2, damping: 0.3, initialVelocity: 2)) {
             figureIsShowing.toggle()
         }
     }
