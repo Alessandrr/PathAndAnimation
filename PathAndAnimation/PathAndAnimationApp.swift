@@ -11,7 +11,7 @@ import SwiftUI
 struct PathAndAnimationApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            FlowerView()
         }
     }
 }

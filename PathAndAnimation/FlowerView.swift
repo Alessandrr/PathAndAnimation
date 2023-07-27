@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  FlowerView.swift
 //  PathAndAnimation
 //
 //  Created by Aleksandr Mamlygo on 27.07.23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct FlowerView: View {
     @State private var figureIsShowing = true
     let numberOfPetals = 12
     
@@ -39,7 +39,13 @@ struct ContentView: View {
     }
     
     private func buttonAction() {
-        withAnimation(.interpolatingSpring(mass: 0.2, stiffness: 0.2, damping: 0.3, initialVelocity: 2)) {
+        withAnimation(
+            .interpolatingSpring(
+                mass: 0.2,
+                stiffness: 0.2,
+                damping: 0.3,
+                initialVelocity: 2.5)
+        ) {
             figureIsShowing.toggle()
         }
     }
@@ -62,19 +68,24 @@ struct Petal: View {
                 path.addQuadCurve(to: CGPoint(x: farPointX, y: middleY), control: CGPoint(x: farPointX, y: 0))
                 
                 path.move(to: CGPoint(x: farPointX, y: middleY))
-                
                 path.addQuadCurve(to: CGPoint(x: middleX, y: width), control: CGPoint(x: farPointX, y: height))
                 
                 path.addQuadCurve(to: CGPoint(x: nearPointX, y: middleY), control: CGPoint(x: nearPointX, y: middleY))
             }
-            .fill(LinearGradient(colors: [.red, .yellow] , startPoint: .bottomLeading, endPoint: .topTrailing))
+            .fill(
+                LinearGradient(
+                colors: [.red, .yellow],
+                startPoint: .bottomLeading,
+                endPoint: .topTrailing
+                )
+            )
         }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct FlowerView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        FlowerView()
             .frame(width: 400, height: 400)
     }
 }
